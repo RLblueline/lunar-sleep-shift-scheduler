@@ -1,0 +1,2 @@
+# Let the lsst service set the display backlight without root (REQ-HW-015).
+SUBSYSTEM=="backlight", ACTION=="add", RUN+="/bin/chgrp gpio /sys%p/brightness", RUN+="/bin/chmod g+w /sys%p/brightness"

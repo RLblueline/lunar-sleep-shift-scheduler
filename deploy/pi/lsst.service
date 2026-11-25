@@ -1,0 +1,20 @@
+[Unit]
+Description=Lunar Sleep-Shift data service
+After=local-fs.target
+RequiresMountsFor=/data /media/lsst-usb
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/lsst/lsst.env
+WorkingDirectory=/opt/lunar-sleep-shift/service
+ExecStart=/usr/bin/python3 -m lsst_service
+Restart=always
+RestartSec=1
+User=lsst
+Group=gpio
+SupplementaryGroups=i2c
+# The hardware watchdog (RuntimeWatchdogSec in /etc/systemd/system.conf, set by setup.sh)
+# reboots a hung Pi; Restart=always restarts a crashed service (REQ-OPS-003).
+
+[Install]
+WantedBy=multi-user.target
