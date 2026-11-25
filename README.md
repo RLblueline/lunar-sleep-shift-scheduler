@@ -13,6 +13,7 @@ Designed to NASA standards with documented tailoring; not certified. See the [ta
 Needs Python 3.10+ and Node 18+. Nothing else for the software.
 
 ```sh
+git clone https://github.com/RLblueline/lunar-sleep-shift-scheduler.git && cd lunar-sleep-shift-scheduler
 python3 web/build.py
 (cd service && python3 -m lsst_service)    # then open http://127.0.0.1:8642; Ctrl+C to stop
 ```

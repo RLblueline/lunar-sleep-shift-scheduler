@@ -51,7 +51,7 @@ Three rules hold everything together:
 You need Python 3.10+ and Node 18+. No other packages for the software.
 
 ```sh
-git clone https://github.com/RLblueline/lunar-sleep-shift.git && cd lunar-sleep-shift
+git clone https://github.com/RLblueline/lunar-sleep-shift-scheduler.git && cd lunar-sleep-shift-scheduler
 python3 web/build.py
 (cd service && python3 -m lsst_service)     # keeps running; stop it with Ctrl+C
 ```
