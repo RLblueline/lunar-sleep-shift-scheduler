@@ -1,7 +1,7 @@
 #!/bin/bash
 # One-time setup on Raspberry Pi OS (Bookworm, desktop). Run as root from the repo root:
 #   sudo bash deploy/pi/setup.sh
-# Review each step first; steps 5 and 6 change how the Pi boots.
+# Review each step first; steps 3, 5 and 6 change how the Pi boots.
 set -euo pipefail
 REPO="$(cd "$(dirname "$0")/../.." && pwd)"
 
