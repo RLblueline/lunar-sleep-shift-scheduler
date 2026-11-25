@@ -33,6 +33,7 @@ class Rig(unittest.TestCase):
         self.svc.shutdown_hook = lambda: self.shutdowns.append(1)
         httpd = HTTPServer(("127.0.0.1", 0), make_handler(self.svc))
         threading.Thread(target=httpd.serve_forever, daemon=True).start()
+        self.addCleanup(httpd.server_close)
         self.addCleanup(httpd.shutdown)
         self.base = f"http://127.0.0.1:{httpd.server_address[1]}"
 

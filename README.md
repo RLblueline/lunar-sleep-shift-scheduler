@@ -14,7 +14,7 @@ Needs Python 3.10+ and Node 18+. Nothing else for the software.
 
 ```sh
 python3 web/build.py
-cd service && python3 -m lsst_service      # then open http://127.0.0.1:8642
+(cd service && python3 -m lsst_service)    # then open http://127.0.0.1:8642; Ctrl+C to stop
 ```
 
 Every hardware driver is simulated on a laptop. The Systems tab has buttons for the ACK and SNOOZE keys, the LIGHTS, MODE and TEST switches, the charger and the battery level. Opening `web/dist/index.html` straight from disk also works, as a browser-only demo without durable storage or hardware.
@@ -23,6 +23,8 @@ Every hardware driver is simulated on a laptop. The Systems tab has buttons for 
 
 ## Check it
 
+From the repo root, in a second terminal:
+
 ```sh
 node --test tests/js/*.test.js                 # engine and planner
 python3 -m unittest discover -s tests/py       # data service, hardware, enclosure report
@@ -30,7 +32,7 @@ python3 tools/trace.py                         # everything + docs/traceability.
 python3 tools/powercut_harness.py --cycles 10000   # long kill-9 durability run
 ```
 
-`tools/trace.py` exits non-zero while any test fails or a testable requirement has no test. It currently lists 51 requirements: 37 verified by test, 10 by inspection or analysis, and 4 open: PRC crossover, per-person body-clock period (not built yet), corner and edge radii, and battery review. The [team plan](docs/10-team-plan.md) assigns each one.
+`tools/trace.py` exits non-zero while any test fails or a testable requirement has no test. It currently lists 51 requirements: 37 verified by test, 10 by inspection, demonstration or analysis, and 4 open: PRC crossover, per-person body-clock period (not built yet), corner and edge radii, and battery review. The [team plan](docs/10-team-plan.md) assigns each one.
 
 ## CAD
 

@@ -116,6 +116,10 @@ class Service:
                 self.battery.set_pct(body["battery_pct"])
         except ValueError as e:
             return 400, {"error": str(e)}
+        c, b = self.controls.state(), self.battery.read()
+        if self.shutting_down and (c["ext_power"] or b["pct"] > self.cfg.low_batt_pct):
+            self.shutting_down = False   # simulated 'press PWR to restart'
+            self.low_since = None
         self.monitor_tick()
         return self.controls_get(None)
 

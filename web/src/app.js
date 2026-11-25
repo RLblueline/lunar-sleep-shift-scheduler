@@ -471,7 +471,7 @@ function pollHw() {
     for (let i = prev.presses.ACK; i < c.presses.ACK; i++) hardwareAck();
     for (let i = prev.presses.SNOOZE; i < c.presses.SNOOZE; i++) hardwareSnooze();
     if (c.lights_link !== prev.lights_link) toast(c.lights_link ? 'LIGHTS switch: linked to the crew plan.' : 'LIGHTS switch: manual. Lights stay as they are.');
-    if (c.mode !== prev.mode) App.view = c.mode === 'ctrl' ? 'controller' : 'crew';
+    if (c.mode !== prev.mode && (App.view === 'crew' || App.view === 'controller')) App.view = c.mode === 'ctrl' ? 'controller' : 'crew';
     changed = ['mode', 'test_mode', 'ext_power', 'shutting_down', 'faults_allowed'].some(k => c[k] !== prev[k]);
   } else if (c.mode === 'ctrl') App.view = 'controller';
   if (App.lightsFollow !== c.lights_link) { App.lightsFollow = c.lights_link; App.lightMode = null; changed = true; }   // the switch always wins

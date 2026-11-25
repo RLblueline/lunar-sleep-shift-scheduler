@@ -4,6 +4,7 @@ How the four of us change this repo without breaking each other's work. New here
 
 ## The loop
 
+0. **First week only:** the Systems lead protects `main`, runs `python3 tools/create_issues.py RLblueline/lunar-sleep-shift` (needs `gh auth login`) and builds the project board (T01). Until then, pick from [the team plan](docs/10-team-plan.md#backlog).
 1. **Pick an issue** from the project board and assign yourself. No issue? Make one first, so the team knows what you're doing.
 2. **Branch from main.** Name it `<issue number>-<short-name>`, for example `12-prc-crossover`.
    ```sh

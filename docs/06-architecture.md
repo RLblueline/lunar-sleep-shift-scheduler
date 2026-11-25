@@ -56,12 +56,13 @@ If power fails before step 3 finishes, the record was never acknowledged and the
 | `POST /api/append` | Durable append (returns after fsync of all copies) |
 | `GET/POST /api/snapshot` | Read or write A/B snapshot |
 | `GET/POST /api/lights` | Read state and sensor, or set mode |
-| `POST /api/fault` | Fault injection (test builds only, TEST switch on) |
+| `POST /api/fault` | Fault injection: needs `LSST_ALLOW_FAULTS=1` (laptop default; off in the Pi config) and the TEST switch on |
 | `GET /api/controls` | Key press counters, switch positions, battery, charger, shutdown flag |
 | `POST /api/indicator` | ACK light pattern: off, steady, night, prompt (capped at 30 % duty) |
 | `POST /api/backlight` | Display backlight level 0.02 to 1 |
 | `POST /api/sim` | Drive simulated keys, switches and battery (laptop only; refused with real hardware) |
-| `GET/POST /api/state`, `/api/init`, `/api/alive` | Boot markers and uptime tracking |
+| `GET /api/state`, `POST /api/init`, `POST /api/alive` | Boot markers and uptime tracking |
+| `GET /api/linecount` | Lines in each log copy (Systems screen) |
 
 ## Hardware controls
 

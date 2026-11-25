@@ -1,6 +1,6 @@
 # Hardware design: the tablet
 
-A battery-powered, 3D-printed tablet that runs the Lunar Sleep-Shift software on a Raspberry Pi 5 with the 7 in Touch Display 2. Outer size 240 × 138 × 43 mm, about 770 g and about 3 h on battery (both estimates until the unit is built).
+A battery-powered, 3D-printed tablet that runs the Lunar Sleep-Shift software on a Raspberry Pi 5 with the 7 in Touch Display 2. Outer size 240 × 138 × 43 mm (58.5 mm deep over the switch covers), about 770 g (estimate until the unit is built). Runtime is not yet estimated: 25.2 Wh of cells against a Pi 5 and display drawing roughly 5 to 8 W suggests 3 to 4 h, to be measured (HW-OI-5).
 
 The model is parametric: `cad/tablet.py` holds every dimension, `cad/check.py` verifies the design rules ([09-hardware-checks.md](09-hardware-checks.md)), and `cad/build.py` exports a STEP assembly, print-ready STLs and a 3D viewer.
 
@@ -68,10 +68,11 @@ The charger has no power path (HW-OI-1): charge with MAIN off until it is replac
 | --- | --- | --- | --- |
 | ACK key | 17 | Tactile switch to GND | Internal pull-up; counted on press |
 | SNOOZE key | 5 | Tactile switch to GND | Internal pull-up |
-| LIGHTS toggle | 27 | Up = LINK = closed to GND | Open wire reads MAN (safe state) |
-| MODE toggle | 6 | Up = CREW = closed to GND | |
-| TEST toggle | 22 | Up = on = closed to GND | Fault tools also need the build flag |
-| Charger present | 24 | Charger board status, through a divider | |
+| LIGHTS toggle | 27 | Up (LINK) throw to GND | Open wire reads MAN: lights stay put (safe) |
+| MODE toggle | 6 | Down (CTRL) throw to GND | Open wire reads CREW: crew screen (safe) |
+| TEST toggle | 22 | Up (on) throw to GND | Open wire reads off; fault tools also need the build flag |
+| Charger present | 24 | Collector of an NPN whose base sees the charger's 5 V through 10 kΩ (4.7 kΩ to GND) | Active low: charger present pulls GPIO 24 to GND |
+| PWR key | — | Pi 5 J2 power-button header (no GPIO) | Press to boot after a shutdown; hold 5 s to force off |
 | ACK backlight | 23 | Red 3 mm LED + 1 kΩ | PWM, capped at 30 % duty |
 | Cool white PWM | 12 | LIGHT OUT pin 1 via MOSFET | 6500 K channel |
 | Warm white PWM | 13 | LIGHT OUT pin 2 via MOSFET | 2700 K channel |
@@ -96,11 +97,15 @@ The charger has no power path (HW-OI-1): charge with MAIN off until it is replac
 | 3 | 12 × 12 mm tactile switches + perfboard | ACK, SNOOZE (one board), PWR |
 | 1 | 3 mm red LED (620 nm) + 1 kΩ resistor | ACK backlight |
 | 1 | GX12-5 panel socket and plug | LIGHT OUT |
-| 1 | 2 mm steel pin, 47 mm long | Cover hinge |
+| 1 | 2 mm steel pin, 39 mm long | Cover hinge |
 | 6 | M3 × 35 socket screws + M3 × 5.7 heat-set inserts | Bezel to shell |
 | 8 | M2.5 heat-set inserts + M2.5 × 6 screws | Pi and display stand-offs |
 | 4 | M4 heat-set inserts | VESA 75 mount |
+| 1 | 3-channel logic-level MOSFET board (e.g. IRLZ44N × 3) | Drives LIGHT OUT |
+| 1 | 12 V LED panel: cool white, warm white and red strips, plus its own 12 V supply | Habitat light stand-in for the demo |
+| 1 | NPN transistor (2N3904) + 10 kΩ and 4.7 kΩ resistors | Charger-present sense |
 | 1 | 0.5 mm foam gasket tape, VHB tape, 12 mm webbing | Display seal, overlay, tether |
+| — | 22 AWG silicone wire (power), 28 AWG ribbon (signals), JST-XH connectors | Wiring |
 
 ## Printing
 

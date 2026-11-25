@@ -4,7 +4,7 @@ Front panel (glove-sized, see docs/08-hardware-design.md):
     ACK     momentary key, confirms the current crew prompt          BCM 17
     SNOOZE  momentary key, snoozes the current prompt 15 min         BCM 5
     LIGHTS  latching toggle under a flip-up cover: up LINK, down MAN BCM 27
-    MODE    latching toggle under a flip-up cover: up CREW, down CTRL BCM 6
+    MODE    latching toggle under a flip-up cover: up CREW, down CTRL BCM 6 (CTRL throw grounded)
 Edge, recessed in wells:
     TEST    latching toggle; fault injection works only when it is on BCM 22
     EXT_PWR charger-present sense from the charge board              BCM 24
@@ -13,7 +13,8 @@ Output:
 
 Keys are counted, not polled for level: the UI reads the press counters and acts once per
 new press, so a slow UI poll can never miss or double a press. Every input is wired to
-ground with the Pi's internal pull-up, so a broken wire reads as "off" (the safe state).
+ground with the Pi's internal pull-up. Each switch grounds the throw whose loss is harmless, so a
+broken wire reads LIGHTS = MAN, MODE = CREW, TEST = off, charger = absent.
 """
 from __future__ import annotations
 
@@ -110,7 +111,7 @@ class GpioControls(SimulatedControls):
     def state(self) -> dict:
         # switch closed to ground = up position
         self.lights_link = self._toggles["LIGHTS"].is_pressed
-        self.mode = "crew" if self._toggles["MODE"].is_pressed else "ctrl"
+        self.mode = "ctrl" if self._toggles["MODE"].is_pressed else "crew"   # open wire -> crew screen
         self.test_mode = self._toggles["TEST"].is_pressed
         self.ext_power = self._toggles["EXT_PWR"].is_pressed
         return super().state()

@@ -138,6 +138,7 @@ class ServiceTests(unittest.TestCase):
         cfg.state_dir = os.path.join(self.tmp, "state")
         httpd = HTTPServer(("127.0.0.1", 0), make_handler(Service(cfg)))
         threading.Thread(target=httpd.serve_forever, daemon=True).start()
+        self.addCleanup(httpd.server_close)
         self.addCleanup(httpd.shutdown)
         return f"http://127.0.0.1:{httpd.server_address[1]}"
 

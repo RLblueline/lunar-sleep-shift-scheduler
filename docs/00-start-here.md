@@ -14,9 +14,9 @@ Lunar missions change the crew's schedule suddenly. A docking moves 4 hours earl
 | Intrinsic period (τ, "tau") | How long one cycle takes with no light cues, about 24.2 h on average, different for each person | `tau` on each crew record |
 | CBTmin | Core body temperature minimum, about 2 h before natural wake. The clock's reference point. | `cbtMins()` |
 | Phase response curve (PRC) | Light before CBTmin delays the clock (later); light after CBTmin advances it (earlier) | `prc()`, Validation screen |
-| Process S | Sleep pressure: rises while awake, falls during sleep | readiness calculation |
-| Sleep inertia | Grogginess right after waking, about 20 min | readiness calculation |
-| Readiness | Our 0–100 alertness score combining clock, sleep pressure, debt and inertia. **Weights are placeholders** (open item OI-2). | `band()`, crew screen |
+| Process S | Sleep pressure: rises while awake, falls during sleep | `simulate()` |
+| Sleep inertia | Grogginess right after waking, about 20 min | `simulate()` |
+| Readiness | Our 0–100 alertness score combining clock, sleep pressure, debt and inertia. **Weights are placeholders** (open item OI-2). `band()` turns it into Green/Amber/Red. | `simulate()`, `band()` |
 | Light modes | ISS lighting presets: 6500 K phase-shift (blue-rich), 4500 K general, 2700 K pre-sleep | `service/lsst_service/hardware/lights.py` |
 
 The model is the Forger, Jewett & Kronauer (1999) light-driven oscillator, integrated with RK4 in 6-minute steps. It's deterministic: the same inputs always give exactly the same outputs. Recovery and testing depend on that.
@@ -51,18 +51,22 @@ Three rules hold everything together:
 You need Python 3.10+ and Node 18+. No other packages for the software.
 
 ```sh
-git clone <repo url> && cd lunar-sleep-shift
+git clone https://github.com/RLblueline/lunar-sleep-shift.git && cd lunar-sleep-shift
 python3 web/build.py
-cd service && python3 -m lsst_service
+(cd service && python3 -m lsst_service)     # keeps running; stop it with Ctrl+C
 ```
 
-Open http://127.0.0.1:8642. Then try:
+Open http://127.0.0.1:8642. Run tests in a **second terminal at the repo root**: from inside `service/` the test commands find nothing and look like a pass. Data lives in `data/`; delete that folder to start from a fresh sample mission. Then try:
 
 - **Crew tab.** Drag the mission clock. Watch the screen go from white (alert light) to amber to deep red (wind-down).
-- **Systems tab → Tablet hardware.** Press the simulated ACK and SNOOZE buttons, flip LIGHTS and MODE, and set the battery to 4 % with the charger unplugged.
+- **Systems tab → Tablet hardware.** Press the simulated ACK and SNOOZE buttons, flip LIGHTS and MODE, and set the battery to 4 % with the charger unplugged. After 30 s the "Battery empty" screen appears; plug the simulated charger back in to clear it.
 - **Systems tab → Fault injection.** It's locked until you flip the simulated TEST switch on. Then corrupt a copy of the log and watch the boot log repair it.
 - **Controller tab.** Draft a slam shift, look at the reasoning, and approve it in two steps.
 - **Validation tab.** See the PRC, the entrainment check and the Monte Carlo spread.
+
+### Normal test noise
+
+Node prints `not ok … # TODO` with a stack trace for the open items (REQ-MDL-003, REQ-MDL-005). Python skips two enclosure tests marked REVIEW. Both are expected: they are the open items in the team plan, and `tools/trace.py` still exits 0.
 
 ## 5. Where things are
 

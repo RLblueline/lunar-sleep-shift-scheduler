@@ -15,19 +15,7 @@ id lsst >/dev/null 2>&1 || useradd --system --groups gpio,i2c --home /data/lsst 
 mkdir -p /data/lsst/state /media/lsst-usb/lsst /etc/lsst
 chown -R lsst:lsst /data/lsst /media/lsst-usb/lsst
 
-echo "3. Install the app"
-rm -rf /opt/lunar-sleep-shift && cp -r "$REPO" /opt/lunar-sleep-shift
-python3 /opt/lunar-sleep-shift/web/build.py
-cp "$REPO/deploy/pi/lsst.env" /etc/lsst/lsst.env
-cp "$REPO/deploy/pi/lsst.service" /etc/systemd/system/lsst.service
-systemctl daemon-reload && systemctl enable --now lsst.service
-
-echo "4. Kiosk autostart for the desktop user"
-install -m 755 "$REPO/deploy/pi/kiosk.sh" /usr/local/bin/lsst-kiosk
-AUTOSTART=/etc/xdg/autostart/lsst-kiosk.desktop
-printf '[Desktop Entry]\nType=Application\nName=LSST kiosk\nExec=/usr/local/bin/lsst-kiosk\n' > "$AUTOSTART"
-
-echo "5. Hardware: I2C (sensor, battery monitor), backlight access, clean shutdown, watchdog"
+echo "3. Hardware: I2C (sensor, battery monitor), backlight access, clean shutdown, watchdog"
 raspi-config nonint do_i2c 0
 install -m 644 "$REPO/deploy/pi/99-lsst-backlight.rules" /etc/udev/rules.d/99-lsst-backlight.rules
 udevadm control --reload && udevadm trigger --subsystem-match=backlight
@@ -36,6 +24,18 @@ chmod 440 /etc/sudoers.d/lsst-poweroff && visudo -cf /etc/sudoers.d/lsst-powerof
 # The Pi 5 has its own real-time clock: fit the RTC backup cell to the J5 BAT connector so
 # the mission clock survives a dead main battery. No overlay is needed.
 grep -q "^RuntimeWatchdogSec" /etc/systemd/system.conf || echo "RuntimeWatchdogSec=15" >> /etc/systemd/system.conf
+
+echo "4. Install the app (make the /data partition and mount the USB drive first: see step 6)"
+rm -rf /opt/lunar-sleep-shift && cp -r "$REPO" /opt/lunar-sleep-shift
+python3 /opt/lunar-sleep-shift/web/build.py
+cp "$REPO/deploy/pi/lsst.env" /etc/lsst/lsst.env
+cp "$REPO/deploy/pi/lsst.service" /etc/systemd/system/lsst.service
+systemctl daemon-reload && systemctl enable --now lsst.service
+
+echo "5. Kiosk autostart for the desktop user"
+install -m 755 "$REPO/deploy/pi/kiosk.sh" /usr/local/bin/lsst-kiosk
+AUTOSTART=/etc/xdg/autostart/lsst-kiosk.desktop
+printf '[Desktop Entry]\nType=Application\nName=LSST kiosk\nExec=/usr/local/bin/lsst-kiosk\n' > "$AUTOSTART"
 
 cat <<'NOTE'
 6. Manual steps (do these last, they need a reboot):
