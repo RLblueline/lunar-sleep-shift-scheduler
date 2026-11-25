@@ -11,6 +11,14 @@ Confirmed sources (checked October 2026):
 - NASA PVT+, Fatigue Countermeasures Laboratory, NASA Ames (iOS, works offline). https://human-factors.arc.nasa.gov/groups/fatigue/projects/pvt.php
 - Human Integration Design Handbook, NASA/SP-2010-3407/REV1 (section numbers for sleep and lighting still to be confirmed).
 
+NASA-STD-3001 Vol. 2 pages used for the hardware audit (opened October 2026):
+
+- Section 9, Hardware and Equipment (V2 9009, 9011, 9013, 9016, 9118). https://www.nasa.gov/reference/9-0-hardware-and-equipment-vol-2
+- Section 10, Crew Interfaces (V2 10045, 10066, 10068, 10070, 10080). https://www.nasa.gov/reference/10-0-crew-interfaces-vol-2/
+- Appendix D, requirements compliance matrix (V2 8055, 8057, 9029–9032, 10027, 10077). https://www.nasa.gov/wp-content/uploads/2025/07/nasa-std-3001-vol-2-app-d-requirements-compliance-matrix.pdf
+- Appendix F, display design (F.6.4 alert colours). https://www.nasa.gov/reference/appendix-f-vol-2/
+- Not yet read: Tables 9.3-1, 9.3-2, 10.4-4 and F.5-1 (published as images; HW-OI-2).
+
 Model sources (cite after checking the originals):
 
 - Forger, Jewett & Kronauer (1999). A simpler model of the human circadian pacemaker. Journal of Biological Rhythms.

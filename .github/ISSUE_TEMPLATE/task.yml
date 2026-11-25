@@ -1,0 +1,26 @@
+name: Task
+description: A piece of work for the team plan
+labels: []
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What and why
+      description: What needs doing, and which requirement or open item it serves (REQ-..., OI-..., HW-OI-...).
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done when
+      description: A checklist someone else can verify.
+      value: |
+        - [ ] 
+        - [ ] Tests and docs updated in the same pull request
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: Owner role
+      options: [Systems, Model & science, Software & UI, Hardware & CAD]
