@@ -1,0 +1,185 @@
+{
+ "generated": "2026-11-24T18:28:53",
+ "source_hash": "1e6e19ccda3a96a5",
+ "overall": "pass",
+ "checks": [
+  {
+   "name": "No part interferes with another",
+   "status": "pass",
+   "detail": "0 clashes across all part pairs. Press fits by design: Switch cover LIGHTS / Hinge pin (2 mm steel), Switch cover MODE / Hinge pin (2 mm steel)",
+   "req": "REQ-HW-004",
+   "value": 0
+  },
+  {
+   "name": "Contacts are seating faces only",
+   "status": "pass",
+   "detail": "21 face contacts (parts resting on each other, no overlap): Rear shell / Front bezel; Rear shell / Battery door; Rear shell / Compute hatch; Rear shell / Power key cap; Rear shell / Display (Touch Display 2); Rear shell / Pi 5 + Active Cooler; Rear shell / Toggle MAIN; Rear shell / Toggle TEST; Rear shell / Boost 5 V 5 A; Rear shell / BMS + fuse; Rear shell / INA260; Rear shell / GX12-5 socket; Rear shell / USB-C charge board; Front bezel / Control panel overlay; Front bezel / Toggle LIGHTS; Front bezel / Toggle MODE; Key cap ACK / Tactile switch ACK; Key cap SNOOZE / Tactile switch SNOOZE; Power key cap / Power tactile switch; Tactile key board / Tactile switch ACK; Tactile key board / Tactile switch SNOOZE",
+   "req": "REQ-HW-004",
+   "value": 21
+  },
+  {
+   "name": "Printed parts are single, valid, watertight solids",
+   "status": "pass",
+   "detail": "10 parts",
+   "req": "REQ-HW-005",
+   "value": 0
+  },
+  {
+   "name": "Every part fits a 250 \u00d7 210 mm bed",
+   "status": "pass",
+   "detail": "largest: Rear shell 240.0 \u00d7 138.0 \u00d7 36.0 mm",
+   "req": "REQ-HW-005",
+   "value": [
+    240.0,
+    138.0,
+    36.0
+   ]
+  },
+  {
+   "name": "Local wall thickness \u2265 0.8 mm (two extrusion widths)",
+   "status": "pass",
+   "detail": "1st-percentile thickness: Rear shell 1.7, Front bezel 1.4, Control panel overlay 1.0, Battery door 1.0, Compute hatch 1.0, Key cap ACK 1.0, Key cap SNOOZE 1.1, Switch cover LIGHTS 1.1, Switch cover MODE 1.1, Power key cap 3.0",
+   "req": "REQ-HW-005",
+   "value": 1.0
+  },
+  {
+   "name": "Structural walls \u2265 2.4 mm (six perimeters)",
+   "status": "pass",
+   "detail": "wall 2.4 mm, floor 2.4 mm, bezel plate 2.4 mm",
+   "req": "REQ-HW-005",
+   "value": 2.4
+  },
+  {
+   "name": "Prints without support material",
+   "status": "pass",
+   "detail": "largest overhang patch steeper than 45\u00b0: 16.6 mm\u00b2 (Switch cover LIGHTS; limit 25 mm\u00b2); widest horizontal bridge \u2248 12.9 mm (Rear shell; limit 20 mm, width estimated as 4\u00b7area/perimeter)",
+   "req": "REQ-HW-005",
+   "value": [
+    16.6,
+    12.9
+   ]
+  },
+  {
+   "name": "Plan-view corner radius",
+   "status": "review",
+   "detail": "13.0 mm on all corners. NASA-STD-3001 V2 9009/9011 require rounding; confirm against Table 9.3-1/9.3-2.",
+   "req": "REQ-HW-001",
+   "value": 13.0
+  },
+  {
+   "name": "Exposed edge radius",
+   "status": "review",
+   "detail": "3.0 mm front and rear perimeters. Confirm against Table 9.3-1/9.3-2.",
+   "req": "REQ-HW-001",
+   "value": 3.0
+  },
+  {
+   "name": "Front pushbuttons sized for gloved use",
+   "status": "pass",
+   "detail": "24 mm square caps, 10 mm apart, inside 2 mm collars (cap flush with collar); ACK has a raised ring and a red backlight. Target \u2265 19 mm, \u2265 10 mm apart (confirm vs NASA-STD-3001 Table 10.4-4).",
+   "req": "REQ-HW-003",
+   "value": [
+    24.0,
+    10.0
+   ]
+  },
+  {
+   "name": "Front toggles spaced for gloved use",
+   "status": "pass",
+   "detail": "bat-handle toggles 22 mm apart, each under its own flip-up cover with 6 mm between covers; positions engraved beside each cover.",
+   "req": "REQ-HW-003",
+   "value": 22.0
+  },
+  {
+   "name": "Toggles guarded against inadvertent operation",
+   "status": "pass",
+   "detail": "LIGHTS and MODE under hinged flip-up covers (2 mm lift tab on the free edge): 4.1 mm over the lever tip, 2.7 mm beside it in either position. MAIN and TEST levers end 2.2 mm below the top edge in recessed wells; power key recessed 1.4 mm. NASA-STD-3001 V2 10027.",
+   "req": "REQ-HW-002",
+   "value": [
+    4.14,
+    2.69,
+    2.2
+   ]
+  },
+  {
+   "name": "Switch covers swing open without interference",
+   "status": "pass",
+   "detail": "clear at 30\u00b0, 60\u00b0 and 90\u00b0; at about 114\u00b0 the cover comes to rest on the panel, so it stays open past vertical",
+   "req": "REQ-HW-002",
+   "value": 114
+  },
+  {
+   "name": "Connector spacing and keying",
+   "status": "pass",
+   "detail": "LIGHT OUT (GX12, keyed round) on the right edge and CHG 5V (USB-C) on the bottom edge: different faces and shapes, 97 mm apart, so they cannot be swapped. Top-edge controls 22 mm apart or more. NASA-STD-3001 V2 9029/9030/9032.",
+   "req": "REQ-HW-007",
+   "value": 96.9
+  },
+  {
+   "name": "Grasping and restraint provisions",
+   "status": "pass",
+   "detail": "Tether loop (two 3 mm slots for 12 mm webbing) top-left of the rear; VESA 75 M4 inserts for a wall or arm mount; the 41.5 mm control strip is a hand grip. NASA-STD-3001 V2 9016.",
+   "req": "REQ-HW-006",
+   "value": null
+  },
+  {
+   "name": "Front label height",
+   "status": "pass",
+   "detail": "2.8 mm cap height on the front panel; 0.4\u00b0 at a 400 mm hand-held viewing distance needs 2.79 mm (NASA-STD-3001 V2 10066: 12 pt or 0.4\u00b0). Rear service labels 3.0 to 3.4 mm.",
+   "req": "REQ-HW-010",
+   "value": 2.8
+  },
+  {
+   "name": "Controls and connectors labelled",
+   "status": "pass",
+   "detail": "Engraved: ACK, SNOOZE on the caps; LIGHTS and MODE on the switch covers, LINK/MAN and CREW/CTRL beside them, LIGHTS, MODE and LIGHT on the bezel; MAIN, TEST, PWR, LIGHT OUT, CHG 5V, TETHER, BATTERY, +UP, COMPUTE on the rear. NASA-STD-3001 V2 9118.",
+   "req": "REQ-HW-010",
+   "value": null
+  },
+  {
+   "name": "Vent area for the Pi 5 Active Cooler",
+   "status": "pass",
+   "detail": "intake 520 mm\u00b2 (compute hatch, 2 mm finger-safe slots), exhaust 528 mm\u00b2 (top edge); fan inlet \u2248 450 mm\u00b2 (VERIFY). Confirm with a 10-minute stress test: SoC < 80 \u00b0C.",
+   "req": "REQ-HW-009",
+   "value": [
+    520.0,
+    528.0
+   ]
+  },
+  {
+   "name": "Bezel screws engage their inserts without bottoming out",
+   "status": "pass",
+   "detail": "M3\u00d735 engages 5.5 mm of a 5.7 mm insert; tip stops 1.6 mm short of the front plate.",
+   "req": "REQ-HW-004",
+   "value": 5.5
+  },
+  {
+   "name": "Heat-set insert bosses \u2265 insert hole + 3 mm",
+   "status": "pass",
+   "detail": "M2.5: \u00d87.0 boss on \u00d83.6 hole; M3: \u00d87.0 on \u00d84.0 (merged into the outer wall); M4: \u00d810 on \u00d85.6.",
+   "req": "REQ-HW-005",
+   "value": null
+  },
+  {
+   "name": "Bezel holds the display glass outside the viewing area",
+   "status": "pass",
+   "detail": "16.0 mm of bezel over the glass border on each side; 0.5 mm foam gasket.",
+   "req": "REQ-HW-004",
+   "value": 16.0
+  },
+  {
+   "name": "Hand-held mass",
+   "status": "pass",
+   "detail": "770 g estimated (228 g printed PETG). Design target \u2264 1000 g; weigh the built unit.",
+   "req": "REQ-HW-008",
+   "value": 770
+  },
+  {
+   "name": "Battery energy and protection",
+   "status": "review",
+   "detail": "25.2 Wh (1S2P protected 18650, BMS, fuse, MAIN disconnect). Confirm cell selection and tests against JSC 20793 (crewed vehicle battery safety) before any crewed use.",
+   "req": "REQ-HW-008",
+   "value": 25.2
+  }
+ ]
+}
