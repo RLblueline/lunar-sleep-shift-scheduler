@@ -76,3 +76,7 @@ test('REQ-SAF-001 every slam plan explains its choice and flags gaps', () => {
   assert.ok(p.reasons.length >= 3);
   if (p.crit.min < 70) assert.ok(p.reasons.some(r => /gap/i.test(r)));
 });
+
+test('REQ-MDL-005 each crew profile estimates its own intrinsic period from logged data', { todo: 'OI-3: per-person tau estimation not built yet (team plan T09)' }, () => {
+  assert.fail('not built');
+});

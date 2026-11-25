@@ -30,7 +30,7 @@ python3 tools/trace.py                         # everything + docs/traceability.
 python3 tools/powercut_harness.py --cycles 10000   # long kill-9 durability run
 ```
 
-`tools/trace.py` exits non-zero while any test fails or a testable requirement has no test. It currently lists 51 requirements: 37 verified by test, 10 by inspection or analysis, 3 open (PRC crossover, corner and edge radii, battery review) and 1 not built yet (per-person body-clock period). The [team plan](docs/10-team-plan.md) assigns each one.
+`tools/trace.py` exits non-zero while any test fails or a testable requirement has no test. It currently lists 51 requirements: 37 verified by test, 10 by inspection or analysis, and 4 open: PRC crossover, per-person body-clock period (not built yet), corner and edge radii, and battery review. The [team plan](docs/10-team-plan.md) assigns each one.
 
 ## CAD
 

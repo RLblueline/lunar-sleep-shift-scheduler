@@ -24,7 +24,7 @@ Never push straight to `main`. Branch protection will stop you once it's set up 
 python3 web/build.py                          # if you touched web/ or engine/
 node --test tests/js/*.test.js                # engine
 python3 -m unittest discover -s tests/py      # service, hardware, enclosure report
-python3 tools/trace.py                        # all of the above + traceability report
+python3 tools/trace.py                        # all of the above + traceability report; must exit 0
 python3 cad/check.py                          # only if you touched cad/ (needs cadquery, trimesh)
 ```
 
